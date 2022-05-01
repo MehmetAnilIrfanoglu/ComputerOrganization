@@ -1,0 +1,47 @@
+.data
+    
+    line: .asciiz "\n"
+    char: .asciiz "*"
+	message: .asciiz "Value of N: "
+
+.text
+	main:
+	li $v0, 4       
+    la $a0, message
+    syscall
+
+	li $v0,5            
+    syscall
+
+	move $t1 , $v0
+	li $t0 , 0
+
+
+	outer:
+	beq $t0,$t1, endout
+	addi $t0, $t0, 1 	
+	li $t2 , 0
+
+	inner:
+	beq $t2 , $t0 , endin 
+	addi $t2,$t2, 1   
+	li $v0, 4       
+    la $a0, char
+    syscall 
+	j inner
+
+	endin:
+
+	li $v0, 4       
+    la $a0, line
+    syscall 
+
+	j outer
+
+	endout:
+	
+	li $v0, 10     
+    syscall
+
+
+	
